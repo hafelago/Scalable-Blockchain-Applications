@@ -1,2 +1,3 @@
 Repositories:hafelago/flask-app
 docker pull hafelago/flask-app
+I added all the file example-voting-app but but I supposed the most important of that file is the docker-stack.yml
