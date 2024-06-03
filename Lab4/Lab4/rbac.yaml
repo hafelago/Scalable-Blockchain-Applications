@@ -1,0 +1,84 @@
+# Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ethereum-admin
+  namespace: default
+---
+# Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: ethereum-read
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "list", "watch"]
+---
+# role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: ethereum-write
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["create", "update", "patch", "delete"]
+---
+# Admin Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: ethereum-admin
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+# Read 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ethereum-read-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: ethereum-admin
+  namespace: default
+roleRef:
+  kind: Role
+  name: ethereum-read
+  apiGroup: rbac.authorization.k8s.io
+---
+# Write 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ethereum-write-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: ethereum-admin
+  namespace: default
+roleRef:
+  kind: Role
+  name: ethereum-write
+  apiGroup: rbac.authorization.k8s.io
+---
+# Admin 
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ethereum-admin-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: ethereum-admin
+  namespace: default
+roleRef:
+  kind: Role
+  name: ethereum-admin
+  apiGroup: rbac.authorization.k8s.io
