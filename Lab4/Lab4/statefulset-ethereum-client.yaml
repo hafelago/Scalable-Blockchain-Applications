@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: ethereum-client
 spec:
-  serviceName: "ethereum"
+  serviceName: "ethereum-network"
   replicas: 3
   selector:
     matchLabels:
