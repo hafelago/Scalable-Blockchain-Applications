@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "husky": "^9.0.11",
     "jest": "^27.0.6"
   },
   "jest": {
-    "testMatch": ["**/__tests__/**/*.js"]
+    "testMatch": [
+      "**/__tests__/**/*.js"
+    ]
   }
 }
