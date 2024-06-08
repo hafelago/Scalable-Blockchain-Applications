@@ -1,19 +1,18 @@
 {
-  "name": "my-app",
-  "description": "This is my first app",
+  "name": "npm-sample-project",
+  "version": "1.0.0",
+  "description": "Sample npm project with Jest tests",
+  "main": "src/simpleCalc.js",
   "scripts": {
     "test": "jest"
   },
-  "dependencies": {
-    "jest": "^29.5.0",
-    "jslint": "^0.12.1",
-    "yarn": "^1.22.19"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "eslint": "^8.42.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^16.0.0",
-    "eslint-plugin-promise": "^6.1.1"
+    "jest": "^27.0.6"
+  },
+  "jest": {
+    "testMatch": ["**/__tests__/**/*.js"]
   }
 }
