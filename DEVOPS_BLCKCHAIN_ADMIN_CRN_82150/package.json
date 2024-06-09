@@ -4,7 +4,8 @@
   "description": "Sample npm project with Jest tests",
   "main": "src/simpleCalc.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,22 @@
     "globals": "^15.4.0",
     "husky": "^9.0.11",
     "jest": "^27.0.6"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "commonjs": true,
+      "es2021": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 12
+    },
+    "rules": {
+      "no-unused-vars": "warn",
+      "no-console": "off"
+    }
   },
   "jest": {
     "testMatch": [
