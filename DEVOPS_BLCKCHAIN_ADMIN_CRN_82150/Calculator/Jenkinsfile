@@ -1,8 +1,8 @@
 pipeline {
     agent {
         dockerfile {
-            filename 'dockerfile'
-            dir 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150'
+            filename 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/dockerfile'
+            dir '.'
         }
     }
     stages {
@@ -46,13 +46,6 @@ pipeline {
             script {
                 junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/reports/test-results.xml' // Ensure this path matches your Jest configuration
             }
-        }
-    }
-}
-
-    post {
-        always {
-            junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/reports/test-results.xml' // Ensure this path matches your Jest configuration
         }
     }
 }
