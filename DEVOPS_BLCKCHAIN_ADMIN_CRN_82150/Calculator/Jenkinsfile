@@ -1,7 +1,7 @@
 pipeline {
     agent {
         dockerfile {
-            filename 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/Dockerfile'
+            filename 'dockerfile'
             dir 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150'
         }
     }
@@ -14,7 +14,7 @@ pipeline {
                     extensions: [], 
                     userRemoteConfigs: [[
                         url: 'https://github.com/hafelago/Scalable-Blockchain-Applications.git',
-                        credentialsId: 'da17bf46-97c3-4463-a5ab-45cabc0bbc53' // Use your actual credentials ID
+                        credentialsId: 'da17bf46-97c3-4463-a5ab-45cabc0bbc53'
                     ]]
                 ])
             }
@@ -41,6 +41,15 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            script {
+                junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/reports/test-results.xml' // Ensure this path matches your Jest configuration
+            }
+        }
+    }
+}
+
     post {
         always {
             junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/reports/test-results.xml' // Ensure this path matches your Jest configuration
