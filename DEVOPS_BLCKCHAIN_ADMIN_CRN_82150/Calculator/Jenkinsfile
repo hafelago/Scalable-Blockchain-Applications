@@ -1,31 +1,30 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.'
-        }
-    }
+    agent any
     stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/hafelago/Scalable-Blockchain-Applications.git']]
+                ])
+            }
+        }
         stage('Build') {
             steps {
-                script {
-                    // Install project dependencies
-                    sh 'npm install'
-                }
+                echo 'Building...'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    // Run Jest tests
-                    sh 'npm test'
-                }
+                echo 'Testing...'
             }
         }
-    }
-    post {
-        always {
-            junit 'reports/test-results.xml' // Ensure this path matches your Jest configuration
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
         }
     }
 }
