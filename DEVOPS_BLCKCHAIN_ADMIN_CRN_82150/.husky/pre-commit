@@ -1,3 +1,0 @@
-#!/bin/sh
-echo "[Husky] pre-commit"
-git commit -m 'Keep calm and commit'
