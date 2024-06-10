@@ -1,16 +1,46 @@
 pipeline {
     agent any // This uses any available Jenkins agent
     stages {
-        stage('Build'){
-            steps{
-                bat 'npm install'
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/hafelago/Scalable-Blockchain-Applications.git',
+                        credentialsId: 'da17bf46-97c3-4463-a5ab-45cabc0bbc53'
+                    ]]
+                ])
             }
         }
-        stage('Test'){
-            steps{
-                echo 'hi testing '
+        stage('Build') {
+            steps {
+                script {
+                    // Install project dependencies
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+                    // Run Jest tests
+                    sh 'npm test'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/Calculator/reports/test-results.xml' // Ensure this path matches your Jest configuration
             }
         }
     }
 }
-           
