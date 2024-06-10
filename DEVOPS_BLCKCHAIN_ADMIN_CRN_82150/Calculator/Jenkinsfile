@@ -1,5 +1,11 @@
 pipeline {
-    agent any // This uses any available Jenkins agent
+    agent {
+        docker {
+            image 'hafelago/my-jenkins-with-nodejs:latest'
+            label 'my-nodejs-agent' // Optional: specify a label if you want to restrict to specific agents
+            args '-v /var/run/docker.sock:/var/run/docker.sock' // Optional: add any necessary Docker run arguments
+        }
+    }
     stages {
         stage('Checkout') {
             steps {
