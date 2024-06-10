@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Echo my name
-        run: echo "My name is Tushar Tiwari"
+        run: echo "Harold"
