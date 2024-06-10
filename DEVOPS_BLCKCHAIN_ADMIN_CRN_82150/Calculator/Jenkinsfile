@@ -1,8 +1,8 @@
 pipeline {
     agent {
         dockerfile {
-            filename 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/dockerfile'
-            dir '.'
+            filename 'dockerfile'
+            dir 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150'
         }
     }
     stages {
