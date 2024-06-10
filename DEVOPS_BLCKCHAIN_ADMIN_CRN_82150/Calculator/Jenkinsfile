@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/Dockerfile'
+            dir 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150'
+        }
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -7,24 +12,38 @@ pipeline {
                     branches: [[name: '*/main']], 
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/hafelago/Scalable-Blockchain-Applications.git']]
+                    userRemoteConfigs: [[
+                        url: 'https://github.com/hafelago/Scalable-Blockchain-Applications.git',
+                        credentialsId: 'da17bf46-97c3-4463-a5ab-45cabc0bbc53' // Use your actual credentials ID
+                    ]]
                 ])
             }
         }
         stage('Build') {
             steps {
-                echo 'Building...'
+                script {
+                    // Install project dependencies
+                    sh 'npm install'
+                }
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                script {
+                    // Run Jest tests
+                    sh 'npm test'
+                }
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying...'
             }
+        }
+    }
+    post {
+        always {
+            junit 'DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/reports/test-results.xml' // Ensure this path matches your Jest configuration
         }
     }
 }
