@@ -39,7 +39,7 @@ jobs:
           path: DEVOPS_BLCKCHAIN_ADMIN_CRN_82150/Calculator/dist
 
       - name: Fetch the secret API key
-        run: echo "API_KEY=${{ secrets.TEST_SECRET }}" >> $GITHUB_ENV
+        run: echo "API_KEY=${{ secrets.TEST1 }}" >> $GITHUB_ENV
 
       - name: Use API key
         run: echo "The API key is $API_KEY"
